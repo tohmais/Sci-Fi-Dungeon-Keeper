@@ -1,17 +1,26 @@
 import {camera} from "../modules/gui.js";
-
-
-function playSound(filepath, loop=false) {
+let sound;
+function initSound() {
     let listener;
-    if (camera.children.length === 0) {
-        listener = new THREE.AudioListener();
-        camera.add( listener );
-    } else {
-        listener = camera.children[0];
-    }
-
+    listener = new THREE.AudioListener();
+    camera.add( listener );
+    sound = new THREE.Audio( listener );
+}
+function playSound(filepath, loop=false) {
+    // if (sound.isPlaying) {
+    //     sound.stop();
+    // }
 // create a global audio source
-    const sound = new THREE.Audio( listener );
+// load a sound and set it as the Audio object's buffer
+    var audio = new Audio(filepath)
+    audio.play();
+}
+
+function playBackground(filepath, loop=true) {
+    if (sound.isPlaying) {
+         sound.stop();
+    }
+// create a global audio source
 // load a sound and set it as the Audio object's buffer
     const audioLoader = new THREE.AudioLoader();
     audioLoader.load( filepath, function( buffer ) {
@@ -20,6 +29,6 @@ function playSound(filepath, loop=false) {
         sound.setVolume( 1 );
         sound.play();
     });
-}
+}// load a sound and set it as the Audio object's buffer
 
-export {playSound}
+export {playSound, initSound, playBackground}

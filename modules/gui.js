@@ -10,7 +10,7 @@ import {DungeonRooms} from "../modules/DungeonLayout.js"
 import { MapTile } from "../modules/MapTile.js"
 import { UIBuildRoom } from "../modules/UIBuildRoom.js"
 import { Ally } from "./Ally.js";
-import {playSound} from "../modules/SoundPlayer.js";
+import {playSound, initSound, playBackground} from "../modules/SoundPlayer.js";
 
 const ROOM_COSTP = [1000,5,3,4,1,2,3,4,5,100]
 //const ROOM_COSTC = [1000,10,3,4,3,2,3,4,5,50]
@@ -66,7 +66,8 @@ function init_gui(){
     ghostPlane.position.z = CAMERA_HIDDEN_Z;
     scene.add(ghostPlane);
 
-    playSound("../sfx/CombatMusic.mp3", true);
+    initSound();
+    playBackground("../sfx/CombatMusic.mp3", true);
 
     const bar_tex = new THREE.TextureLoader().load( '../sprites/bar.png' );
     bar_tex.magFilter = THREE.NearestFilter
